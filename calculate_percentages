@@ -1,0 +1,43 @@
+def calculate_percentages(total_in_scope, completed, failed, pending, expired, in_progress, cancelled):
+    # Check if total_in_scope is non-zero to avoid division by zero errors
+    if total_in_scope == 0:
+        return "Total in Scope must be greater than zero to calculate percentages."
+
+    # Calculate percentages
+    completed_percent = (completed / total_in_scope) * 100
+    failed_percent = (failed / total_in_scope) * 100
+    pending_percent = (pending / total_in_scope) * 100
+    expired_percent = (expired / total_in_scope) * 100
+    in_progress_percent = (in_progress / total_in_scope) * 100
+    cancelled_percent = (cancelled / total_in_scope) * 100
+
+    # Store the results in a dictionary
+    percentages = {
+        "Completed": round(completed_percent, 2),
+        "Failed": round(failed_percent, 2),
+        "Pending": round(pending_percent, 2),
+        "Expired": round(expired_percent, 2),
+        "In Progress": round(in_progress_percent, 2),
+        "Cancelled": round(cancelled_percent, 2)
+    }
+
+    return percentages
+
+# Prompt the user for input
+try:
+    total_in_scope = float(input("Enter the Total in Scope: "))
+    completed = float(input("Enter the Completed count: "))
+    failed = float(input("Enter the Failed count: "))
+    pending = float(input("Enter the Pending count: "))
+    expired = float(input("Enter the Expired count: "))
+    in_progress = float(input("Enter the In Progress count: "))
+    cancelled = float(input("Enter the Cancelled count: "))
+
+    # Calculate and display percentages
+    percentages = calculate_percentages(total_in_scope, completed, failed, pending, expired, in_progress, cancelled)
+    print("\nPercentages of each status:")
+    for status, percent in percentages.items():
+        print(f"{status}: {percent}%")
+
+except ValueError:
+    print("Please enter valid numbers for all inputs.")
